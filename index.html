@@ -1,53 +1,29 @@
-<!doctype HTML>
+<!DOCTYPE html>
 <html>
-<script src="https://aframe.io/releases/0.9.2/aframe.min.js"></script>
-<script src="https://raw.githack.com/jeromeetienne/AR.js/2.1.8/aframe/build/aframe-ar.js"></script>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>GeoAR.js demo</title>
+    <script src='https://aframe.io/releases/0.9.2/aframe.min.js'></script>
+    <script src='https://raw.githack.com/jeromeetienne/AR.js/master/aframe/build/aframe-ar.min.js'></script>
+    <script>
+        THREEx.ArToolkitContext.baseURL = 'https://raw.githack.com/jeromeetienne/ar.js/master/three.js/'
+    </script>
+</head>
 
-<script>
-  window.onload = () => {
-    // setTimeout(() => {
-    let places = staticLoadPlaces();
-    return renderPlaces(places);
-    // }, 3000)
+<link rel="stylesheet" href="./index.css">
 
-    function staticLoadPlaces() {
-      return [{
-        name: "Your place name",
-        location: {
-          lat: 47.230213,
-          lng: -1.571853,
-        }
-      }];
-    }
+<script src="./places.js"></script>
 
-    function renderPlaces(places) {
-      let scene = document.querySelector('a-scene');
+<body style='margin: 0; overflow: hidden;'>
+    <a-scene
+        cursor='rayOrigin: mouse; fuse: true; fuseTimeout: 0;'
+        raycaster="objects: [gps-entity-place];"
+        vr-mode-ui="enabled: false"
+    		embedded
+    		arjs='sourceType: webcam; sourceWidth:1280; sourceHeight:960; displayWidth: 1280; displayHeight: 960; debugUIEnabled: false;'>
 
-      places.forEach((place) => {
-        let latitude = place.location.lat;
-        let longitude = place.location.lng;
-
-        // add place name
-        let text = document.createElement('a-link');
-        text.setAttribute('gps-entity-place', `latitude: ${latitude}; longitude: ${longitude};`);
-        text.setAttribute('title', place.name);
-        text.setAttribute('href', 'http://www.example.com/');
-        text.setAttribute('scale', '15 15 15');
-
-        text.addEventListener('loaded', () => {
-          window.dispatchEvent(new CustomEvent('gps-entity-place-loaded'))
-        });
-
-        scene.appendChild(text);
-      });
-    }
-  }
-</script>
-
-<body style='margin : 0px; overflow: hidden;'>
-  <a-scene vr-mode-ui="enabled: false" embedded arjs>
-    <a-camera gps-camera rotation-reader></a-camera>
-  </a-scene>
+        <a-camera gps-camera="minDistance: 40;" rotation-reader>
+		</a-camera>
+	</a-scene>
 </body>
-
-</html>
