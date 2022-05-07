@@ -13,19 +13,30 @@
     <a-scene
       vr-mode-ui="enabled: false"
       embedded
-      arjs="sourceType: webcam; debugUIEnabled: false;"
-    >
+      arjs="sourceType: webcam; debugUIEnabled: false;">
       <a-box
         look-at="[gps-camera]"
     		material="color: yellow"
         scale="100 100 100"
-        gps-entity-place="longitude: 47.230124; latitude: -1.571744;"
+        gps-entity-place="longitude: 47.230021; latitude: -1.571677;"
       ></a-box>
       <a-box
         look-at="[gps-camera]"
     		material="color: red"
         scale="100 100 100"
-        gps-entity-place="longitude: 47.230194; latitude: -1.571824;"
+        gps-entity-place="longitude: 47.230012; latitude: -1.571728;"
+      ></a-box>
+      <a-box
+        look-at="[gps-camera]"
+    		material="color: yellow"
+        scale="100 100 100"
+        gps-entity-place="longitude: 47.230081; latitude: -1.571649;"
+      ></a-box>
+      <a-box
+        look-at="[gps-camera]"
+    		material="color: red"
+        scale="100 100 100"
+        gps-entity-place="longitude: 47.230108; latitude: -1.571719;"
       ></a-box>
       <a-camera gps-camera rotation-reader> </a-camera>
     </a-scene>
